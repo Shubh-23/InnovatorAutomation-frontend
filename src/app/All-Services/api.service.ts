@@ -4,8 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ApiService {
-  url: any = "http://localhost:8080"
-  // url: any = "https://innovatorautomation.onrender.com"
+  // url: any = "http://localhost:8080"
+  url: any = "https://innovatorautomation.onrender.com"
   constructor(private http: HttpClient) { }
 
   loginUser(data: any) {

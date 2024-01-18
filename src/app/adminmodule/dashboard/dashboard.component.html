@@ -1,0 +1,147 @@
+
+<!-- <?php include('include/header.php'); ?> -->
+<app-navbar></app-navbar>
+<div class="main_slide ">
+    <app-sidebar></app-sidebar>
+<!-- <?php include('include/top_bar.php'); ?> -->
+
+<div class="wrap_us conten_set">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="box_grap card_me">
+        <span>
+        <i class="uil uil-file-plus-alt"></i>
+        </span>
+        <p>Total Strockes</p>
+        <h2>30000</h2>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="box_grap card_me">
+        <span style="background: #00c11914; color: #00c119;">
+        <i class="uil uil-check-circle"></i>
+        </span>
+        <p>Successfull Strockes</p>
+        <h2>30000</h2>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="box_grap card_me">
+        <span style="background: #e5000014; color: #e50000;">
+        <i class="uil uil-robot"></i>
+        </span>
+        <p>Machine Reset Count</p>
+        <h2>30000</h2>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="box_grap card_me">
+        <span style="background: #f5680014; color: #f56800;">
+        <i class="uil uil-users-alt"></i>
+        </span>
+        <p>Total Employes</p>
+        <h2>30000</h2>
+      </div>
+    </div>
+  </div>
+
+
+<div class="card_me ">
+  <div class="card_body">
+    <h4>Employee List</h4>
+  <div class="table_des1">
+   <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="orderd">Employee ID</th>
+          <th class="orderd">Employee Name</th>
+          <th class="orderd">Number </th>
+          <th class="orderd">Address</th>
+          <!-- <th class="orderd">Log In Time</th>
+          <th class="orderd">Log Out Time</th> -->
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of employeeDetails">
+          <td>{{item.employee_id}}</td>
+          <td>{{item.employe_name}}</td>
+          <td><span class="icon_tabl">{{item.mobile_no}}</span></td>
+          <td><span class="icon_tabl">{{item.address}}</span></td>
+          <!-- <td><span class="icon_tabl">12/12/2023 10:00 AM</span></td>
+          <td><span class="icon_tabl">12/12/2023 7:00 PM</span></td> -->
+          <td>
+          <span class="btn_us1">
+
+        <button class="btn btn_clr" data-bs-toggle="modal" data-bs-target="#group_add" (click)="open(content)" (click)="openReport(item)"><img src="assets/img/eye2.png" alt=""></button>
+        <button class="btn btn_clr"><img src="assets/img/edit.png" alt=""></button>
+        <button class="btn btn_clr"><img src="assets/img/delete.png" alt=""></button>
+      </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+
+<!-- <?php include('include/footer.php'); ?> -->
+<ng-template #content let-modal>
+  <!-- <div class="modal fade" id="group_add" tabindex="-1"  aria-hidden="true"> -->
+        <div class="modal-header">
+          <!-- <h5 class="modal-title">Add License Group</h5> -->
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"></button>
+        </div>
+        <div class="modal-body">
+        <div class="profile_md1 conten_set">
+            <div class="head_bg"></div>
+            <div class="profile_img">
+              <div class="img_file_p"><img src="assets/img/girl1.png"><span class="verd1"><img src="assets/img/star.png"></span></div>
+              <h4>{{selectedEmployeeDetail.employe_name}}<span>Employee ID: {{selectedEmployeeDetail.employee_id}}</span></h4>
+            </div>
+            <div class="details_more">
+              <!-- <ul class="ul_set">
+                <li><span>Employee Name:</span>Sunita Devi</li>
+                <li><span>Employee ID:</span>961502233</li>
+                <li><span>Number:</span>9898999999</li>
+                <li><span>Address:</span>123 Vijay Nagar Indore</li>
+                <li><span>Log In Time:</span>12/12/2023 10:00 AM</li>
+                <li><span>Log Out Time:</span>12/12/2023 10:00 AM</li>
+              </ul> -->
+              <h4>Report</h4>
+             <div class="table_des1">
+     <div class="table-responsive Report_min">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Log In Time</th>
+            <th>Log Out Time</th>
+            <th>Strockes Count</th>
+            <th>Reset Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of employeeReport">
+            <td>{{item.login_time |  dateformate }}</td>
+            <td>{{item.logout_time | dateformate }}</td>
+            <td>{{item.stick_count}}</td>
+            <td>{{item.reset_count}}</td>
+
+          </tr>
+
+        </tbody>
+      </table>
+      </div>
+    </div>
+            </div>
+          </div>
+        </div>
+
+  <!-- </div> -->
+</ng-template>

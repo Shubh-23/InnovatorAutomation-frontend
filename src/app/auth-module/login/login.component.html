@@ -1,0 +1,43 @@
+<div class="login">
+
+    <div class="row align-items-center">
+      <div class="col-md-6">
+      <img src="assets/img/bg1.jpg" alt="" class="login_img">
+      </div>
+      <div class="col-md-6">
+      <div class="login_box1">
+      <div class="login_box2 conten_set">
+        <h2>
+        Welcome Back !
+        <span>Sign in to continue to Innovator Automation.</span>
+        </h2>
+        <form action="" [formGroup]="loginForm" >
+        <div class="mb-3">
+          <input type="text" class="form-control quantity" formControlName="email" placeholder="Email">
+          <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched )" class="text-danger valdi">
+            <div *ngIf="f.email.errors?.required"> Email is required. </div>
+            <div *ngIf="f.email.errors?.pattern">Please enter proper email</div>
+        </div>
+        </div>
+        <div class="mb-3">
+          <input type="password" class="form-control" placeholder="password" formControlName="password">
+          <!-- <p class="forget mt-2"><a href="forgot.php" class="">Forgot Password ?</a></p> -->
+          <div *ngIf="f.password.invalid && (f.password.dirty || f.password.touched )" class="text-danger valdi">
+            <div *ngIf="f.password.errors?.required"> Password is required. </div>
+            <!-- <div *ngIf="f.password.errors?.pattern">Please Enter proper password</div> -->
+        </div>
+        </div>
+</form>
+
+
+        <div class="form-group1">
+
+        <a class="btn btn_theme btn-lg btn-block text_u" (click)="login()">Login</a>
+        </div>
+      </div>
+      <p class="bott_line">Not registered yet? please, <a >Sign Up</a> </p>
+    </div>
+      </div>
+    </div>
+
+  </div>

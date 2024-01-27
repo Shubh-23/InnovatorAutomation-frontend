@@ -124,6 +124,7 @@
             <th>Log Out Time</th>
             <th>Strockes Count</th>
             <th>Reset Count</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -132,6 +133,7 @@
             <td>{{item.logout_time | dateformate }}</td>
             <td>{{item.stick_count}}</td>
             <td>{{item.reset_count}}</td>
+            <td> <button class="btn btn_clr" (click)="deleteReport(item)"><img src="assets/img/delete.png" alt=""></button></td>
 
           </tr>
 

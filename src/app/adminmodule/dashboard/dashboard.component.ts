@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from 'src/app/All-Services/api.service';
 import { DatePipe } from '@angular/common';
+import swal from 'sweetalert2';
+
 declare var $: any
 @Component({
   selector: 'app-dashboard',
@@ -48,7 +50,29 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+  deleteReport(item:any){
+    console.log(item);
+    
+    let data = { "id": item.id}
+    console.log(data);
+    
+    this._apiService.deleteReport(data).subscribe((res: any) => {
+      console.log(res);
+      if (res.errorCode == 200) {
+        swal.fire({
+          title: "Delete Successfully!",
+          icon: "success"
+        }).then((result:any) => {
+          /* Read more about isConfirmed, isDenied below */
+          
+            this.openReport(this.selectedEmployeeDetail)
+           
+        });;
+        // console.log(this.employeeReport);
 
+      }
+    })
+  }
 
 
   open(content:any){

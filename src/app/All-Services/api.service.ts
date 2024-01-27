@@ -17,4 +17,8 @@ export class ApiService {
   getEmployeeReport(id:any){
     return this.http.get<any>(this.url + "/report/getReportDetailsByEmployeeId/"+id);
   }
+
+  deleteReport(data:any){
+    return this.http.post<any>(this.url + "/report/deleteReportDetailByEmployeeId",data);
+  }
 }

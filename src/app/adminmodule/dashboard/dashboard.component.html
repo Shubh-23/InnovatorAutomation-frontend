@@ -54,10 +54,10 @@
     <table class="table">
       <thead>
         <tr>
-          <th class="orderd">Employee ID</th>
-          <th class="orderd">Employee Name</th>
-          <th class="orderd">Number </th>
-          <th class="orderd">Address</th>
+          <th class="orderd">Machine No </th>
+          <th class="orderd">Empl ID</th>
+          <th class="orderd">Empl Name</th>
+          <th class="orderd">Location</th>
           <!-- <th class="orderd">Log In Time</th>
           <th class="orderd">Log Out Time</th> -->
           <th>Action</th>
@@ -65,9 +65,9 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of employeeDetails">
+          <td><span class="icon_tabl">{{item.mobile_no}}</span></td>
           <td>{{item.employee_id}}</td>
           <td>{{item.employe_name}}</td>
-          <td><span class="icon_tabl">{{item.mobile_no}}</span></td>
           <td><span class="icon_tabl">{{item.address}}</span></td>
           <!-- <td><span class="icon_tabl">12/12/2023 10:00 AM</span></td>
           <td><span class="icon_tabl">12/12/2023 7:00 PM</span></td> -->

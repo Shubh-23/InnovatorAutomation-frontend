@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   loginpage: boolean = true
   forgate: boolean = false
   forgotOTP: boolean = false
+  loader:any=false
   constructor(private router: Router, private fb: FormBuilder, private service: ApiService) { }
   loginForm: any = FormGroup
   forgotPasswordForm: any = FormGroup
@@ -37,10 +38,11 @@ export class LoginComponent implements OnInit {
       this.loginForm.get('email').markAsTouched();
       this.loginForm.get('password').markAsTouched();
     } else {
+      this.loader = true
       // if (this.loginForm.value.email == this.adminEmail && this.loginForm.value.password == this.adminPassword) {
         this.service.loginUser(this.loginForm.value).subscribe((res: any) => {
           if (res.statusCode == 200  && res.submitUserDetails.id != undefined) {
-
+            this.loader = false
             localStorage.setItem("Admin", JSON.stringify(res.submitUserDetails))
           //   localStorage.setItem("token", JSON.stringify(res.data.authtoken))
           localStorage.setItem("adminId",res.submitUserDetails.id)

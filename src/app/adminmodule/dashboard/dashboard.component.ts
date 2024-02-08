@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from 'src/app/All-Services/api.service';
 import { DatePipe } from '@angular/common';
@@ -11,17 +11,28 @@ declare var $: any
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+
+export class DashboardComponent implements OnInit   {
+  @ViewChild('excelTable') excelTable: ElementRef | any; 
+  
   employeeReport: any = []
   selectedEmployeeDetail:any={}
   modalRef: any;
+  
+  
+  constructor(private _apiService: ApiService,private modalService:NgbModal,private datePipe: DatePipe) { 
+    // this.yourElement = element.nativeElement;
+  }
 
-  constructor(private _apiService: ApiService,private modalService:NgbModal,private datePipe: DatePipe) { }
+  // @ViewChild('excelTable', { static: true }) excelTable: ElementRef | any
   adminId: any
   employeeDetails: any = []
+  modalVisible = false;
   ngOnInit(): void {
     this.adminId = localStorage.getItem('adminId')
     this.getAllEmployeeDetails()
+    console.log(this.excelTable);
+    
   }
 
   getAllEmployeeDetails() {
@@ -35,6 +46,7 @@ export class DashboardComponent implements OnInit {
 
 
   openReport(employeeData:any) {
+    
     console.log(employeeData);
     this.selectedEmployeeDetail =employeeData
     this.employeeReport = []
@@ -76,11 +88,35 @@ export class DashboardComponent implements OnInit {
 
 
   open(content:any){
+    this.modalVisible = true;
     this.modalRef = this.modalService.open(content, { size: 'xl' }); // Adjust 'lg' based on your modal size
+
+      this.setupViewChild();
+
+  }
+  setupViewChild() {
+    // Dynamically create ViewChild after modal is opened
+    this.excelTable = new ElementRef(document.querySelector('#excelTable'));
   }
   close() {
+    this.modalVisible = false;
     if (this.modalRef) {
       this.modalRef.close();
     }
   }
+
+
+exportAsExcel() {
+    const uri = 'data:application/vnd.ms-excel;base64,';
+    const template = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>`;
+    const base64 = function(s:any) { return window.btoa(unescape(encodeURIComponent(s))) };
+    const format = function(s:any, c:any) { return s.replace(/{(\w+)}/g, function(m:any, p:any) { return c[p]; }) };
+    const table = this.excelTable.nativeElement;
+    const ctx = { worksheet: 'Worksheet', table: table.innerHTML };
+
+    const link = document.createElement('a');
+    link.download = `${this.selectedEmployeeDetail.employe_name}.xls`;
+    link.href = uri + base64(format(template, ctx));
+    link.click();
+}
 }

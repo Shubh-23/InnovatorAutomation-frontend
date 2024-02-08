@@ -51,7 +51,7 @@
     <h4>Employee List</h4>
   <div class="table_des1">
    <div class="table-responsive">
-    <table class="table">
+    <table class="table" >
       <thead>
         <tr>
           <th class="orderd">Employee ID</th>
@@ -114,10 +114,12 @@
                 <li><span>Log In Time:</span>12/12/2023 10:00 AM</li>
                 <li><span>Log Out Time:</span>12/12/2023 10:00 AM</li>
               </ul> -->
-              <h4>Report</h4>
+              <h4>Report <button (click)="exportAsExcel()" class="btn btn-outline-secondary excelBtn">Export Report</button></h4>
+              
+
              <div class="table_des1">
      <div class="table-responsive Report_min">
-      <table class="table">
+      <table class="table" #excelTable id="excelTable" >
         <thead>
           <tr>
             <th>Log In Time</th>

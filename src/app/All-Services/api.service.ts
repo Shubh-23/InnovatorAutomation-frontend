@@ -14,6 +14,10 @@ export class ApiService {
   getAllEmployeeDetails(id:any){
     return this.http.get<any>(this.url + "/getAllEmployeeDetailByAdminId/"+id);
   }
+
+  getAllEmployeeDetailsCount(id:any){
+    return this.http.get<any>(this.url + "/sales/getAllEmployeeCounts");
+  }
   getEmployeeReport(id:any){
     return this.http.get<any>(this.url + "/report/getReportDetailsByEmployeeId/"+id);
   }

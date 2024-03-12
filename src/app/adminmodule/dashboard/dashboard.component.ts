@@ -18,6 +18,8 @@ export class DashboardComponent implements OnInit   {
   employeeReport: any = []
   selectedEmployeeDetail:any={}
   modalRef: any;
+  totalResetCount:any=0
+  totalStickCount:any=0
   
   
   constructor(private _apiService: ApiService,private modalService:NgbModal,private datePipe: DatePipe) { 
@@ -31,6 +33,7 @@ export class DashboardComponent implements OnInit   {
   ngOnInit(): void {
     this.adminId = localStorage.getItem('adminId')
     this.getAllEmployeeDetails()
+    this.getAllEmployeeDetailsCount()
     console.log(this.excelTable);
     
   }
@@ -40,6 +43,26 @@ export class DashboardComponent implements OnInit   {
       if (res.statusCode == 200) {
 
         this.employeeDetails = res.getAllEmployeeDetailByAdminId
+      }
+    })
+  }
+
+  getAllEmployeeDetailsCount(){
+    this._apiService.getAllEmployeeDetailsCount(this.adminId).subscribe((res: any) => {
+      if (res.errorCode == 200) {
+
+        
+        console.log(res);
+
+
+        res.SalesbyDateDuration.forEach((employeeData:any) => {
+          console.log(employeeData.total_reset_count);
+          
+          this.totalResetCount += JSON.parse(employeeData.total_reset_count);
+          this.totalStickCount += JSON.parse(employeeData.total_stick_count);
+      });
+      
+        
       }
     })
   }

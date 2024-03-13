@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit   {
 
 
         res.SalesbyDateDuration.forEach((employeeData:any) => {
-          console.log(employeeData.total_reset_count);
+          // console.log(employeeData.total_reset_count);
           
           this.totalResetCount += JSON.parse(employeeData.reset_count);
           this.totalStickCount += JSON.parse(employeeData.stick_count);
